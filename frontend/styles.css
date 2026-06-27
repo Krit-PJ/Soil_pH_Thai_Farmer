@@ -1,0 +1,48 @@
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --success: #16a34a;
+  --warn: #f59e0b;
+  --danger: #dc2626;
+  --radius: 18px;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
+.app-shell { width: min(760px, 100%); margin: 0 auto; padding: 16px; }
+.app-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+h1 { font-size: 1.35rem; margin: 0; line-height: 1.2; }
+h2 { font-size: 1.15rem; margin: 0 0 16px; }
+p { margin: 0; }
+#versionText, .hint { color: var(--muted); font-size: .9rem; }
+.badge { background: #dbeafe; color: #1e40af; padding: 6px 10px; border-radius: 999px; font-size: .78rem; font-weight: 700; white-space: nowrap; }
+.progress-card, .step, .status-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: 0 8px 30px rgba(15, 23, 42, .06); }
+.progress-card { margin-bottom: 12px; }
+.progress { height: 10px; background: #e2e8f0; border-radius: 999px; overflow: hidden; margin-bottom: 8px; }
+#progressBar { height: 100%; width: 20%; background: var(--primary); transition: width .25s; }
+.step { display: none; }
+.step.active { display: block; }
+label, legend { display: block; font-weight: 700; margin: 14px 0 6px; }
+input, select, textarea { width: 100%; border: 1px solid #cbd5e1; border-radius: 14px; padding: 14px 12px; font-size: 1.05rem; background: #fff; }
+input:focus, select:focus, textarea:focus { outline: 3px solid #bfdbfe; border-color: var(--primary); }
+fieldset { border: 1px solid var(--line); border-radius: 14px; margin: 16px 0; padding: 8px 12px 12px; }
+.check { display: flex; align-items: center; gap: 10px; font-weight: 500; margin: 10px 0; }
+.check input { width: 22px; height: 22px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.button-row { display: flex; gap: 10px; margin-top: 14px; }
+button { border: 0; background: var(--primary); color: white; padding: 14px 18px; border-radius: 14px; font-size: 1.05rem; font-weight: 800; flex: 1; cursor: pointer; }
+button:hover { background: var(--primary-dark); }
+button.secondary { background: #e2e8f0; color: var(--text); }
+button.success { background: var(--success); }
+.hidden { display: none !important; }
+.result-box { border-radius: 16px; padding: 14px; background: #f1f5f9; border: 1px solid var(--line); }
+.result-status { font-weight: 900; font-size: 1.15rem; margin-bottom: 8px; }
+.status-normal { color: var(--success); }
+.status-watch { color: var(--warn); }
+.status-repeat, .status-lab { color: var(--danger); }
+.status-card { margin-top: 12px; }
+@media (max-width: 560px) { .grid-2 { grid-template-columns: 1fr; } h1 { font-size: 1.15rem; } .app-shell { padding: 12px; } }

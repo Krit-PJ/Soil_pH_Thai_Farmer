@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#2563eb" />
+  <title>Thai Farm Soil pH Field Index</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div>
+        <h1>ตรวจ pH/EC ดินรายแปลง</h1>
+        <p id="versionText">MVP v0.1</p>
+      </div>
+      <span class="badge">Field-Water Index</span>
+    </header>
+
+    <section class="progress-card" aria-label="ขั้นตอน">
+      <div class="progress"><div id="progressBar"></div></div>
+      <p id="stepLabel">ขั้นที่ 1 จาก 5</p>
+    </section>
+
+    <form id="measurementForm" novalidate>
+      <section class="step active" data-step="1">
+        <h2>1) เลือกเกษตรกรและแปลง</h2>
+        <label>ชื่อเกษตรกร <input name="farmer_name" required placeholder="เช่น นายสมชาย" /></label>
+        <label>เบอร์โทร <input name="phone" inputmode="tel" placeholder="08x-xxx-xxxx" /></label>
+        <label>จังหวัด <input name="province" required placeholder="เช่น ระยอง" /></label>
+        <label>ชื่อแปลง <input name="plot_name" required placeholder="เช่น แปลงทุเรียน 1" /></label>
+        <label>พืชหลัก
+          <select name="crop" required>
+            <option value="">เลือกพืช</option>
+            <option>ข้าว</option><option>มันสำปะหลัง</option><option>อ้อย</option><option>ข้าวโพด</option>
+            <option>ทุเรียน</option><option>ลำไย</option><option>ผัก</option><option>อื่น ๆ</option>
+          </select>
+        </label>
+        <label>ชนิดดินคร่าว ๆ
+          <select name="soil_texture_simple" required>
+            <option value="ไม่รู้">ไม่รู้</option><option>ทราย</option><option>ร่วน</option><option>เหนียว</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="step" data-step="2">
+        <h2>2) สถานการณ์วันนี้</h2>
+        <label>ระยะพืช
+          <select name="crop_stage" required>
+            <option>ไม่ทราบ</option><option>ก่อนปลูก</option><option>เจริญเติบโต</option><option>ออกดอก</option><option>ให้ผล</option><option>หลังเก็บเกี่ยว</option>
+          </select>
+        </label>
+        <label>ความลึกตัวอย่างดิน
+          <select name="soil_depth" required>
+            <option>0–20 cm</option><option>0–15 cm</option><option>20–40 cm</option>
+          </select>
+        </label>
+        <fieldset>
+          <legend>เหตุการณ์ล่าสุด</legend>
+          <label class="check"><input type="checkbox" name="recent_event" value="ไม่มีเหตุการณ์พิเศษ" checked /> ไม่มีเหตุการณ์พิเศษ</label>
+          <label class="check"><input type="checkbox" name="recent_event" value="ฝนตก" /> ฝนตก</label>
+          <label class="check"><input type="checkbox" name="recent_event" value="เพิ่งให้น้ำ" /> เพิ่งให้น้ำ</label>
+          <label class="check"><input type="checkbox" name="recent_event" value="เพิ่งใส่ปุ๋ย" /> เพิ่งใส่ปุ๋ย</label>
+          <label class="check"><input type="checkbox" name="recent_event" value="เพิ่งใส่ปูน/โดโลไมต์" /> เพิ่งใส่ปูน/โดโลไมต์</label>
+          <label class="check"><input type="checkbox" name="recent_event" value="พืชมีอาการผิดปกติ" /> พืชมีอาการผิดปกติ</label>
+        </fieldset>
+      </section>
+
+      <section class="step" data-step="3">
+        <h2>3) ค่าน้ำก่อนสกัด</h2>
+        <label>แหล่งน้ำที่ใช้สกัด
+          <select name="water_source" required>
+            <option>บ่อ</option><option>คลอง</option><option>ประปา</option><option>น้ำฝน</option><option>น้ำหยด</option><option>น้ำผสมปุ๋ย</option><option>อื่น ๆ</option>
+          </select>
+        </label>
+        <div class="grid-2">
+          <label>pH น้ำ <input name="ph_water" required type="number" step="0.01" inputmode="decimal" placeholder="7.20" /></label>
+          <label>EC น้ำ (dS/m) <input name="ec_water" required type="number" step="0.001" inputmode="decimal" placeholder="0.300" /></label>
+        </div>
+      </section>
+
+      <section class="step" data-step="4">
+        <h2>4) ค่าดินสกัดด้วยน้ำในแปลง</h2>
+        <p class="hint">SOP: ดิน 20 g + น้ำ 50 mL, เขย่า 2 นาที, พัก 15 นาที</p>
+        <div class="grid-2">
+          <label>pH ดิน <input name="ph_soil_fw" required type="number" step="0.01" inputmode="decimal" placeholder="5.80" /></label>
+          <label>EC ดิน (dS/m) <input name="ec_soil_fw" required type="number" step="0.001" inputmode="decimal" placeholder="0.750" /></label>
+        </div>
+        <label>รูปตัวอย่าง/ต้นพืช <input name="photo" type="file" accept="image/*" capture="environment" /></label>
+        <label>หมายเหตุ <textarea name="note" rows="3" placeholder="เช่น เพิ่งใส่ปุ๋ยเมื่อวาน"></textarea></label>
+      </section>
+
+      <section class="step" data-step="5">
+        <h2>5) ตรวจสอบและบันทึก</h2>
+        <div id="resultBox" class="result-box"></div>
+        <p class="hint">ระบบจะคำนวณ ΔpH และ ΔEC อัตโนมัติ และบันทึกเข้า Google Sheets เมื่อเชื่อม API แล้ว</p>
+      </section>
+
+      <nav class="button-row">
+        <button type="button" id="prevBtn" class="secondary">ย้อนกลับ</button>
+        <button type="button" id="nextBtn">ถัดไป</button>
+        <button type="submit" id="submitBtn" class="success hidden">บันทึกข้อมูล</button>
+      </nav>
+    </form>
+
+    <section id="saveStatus" class="status-card hidden"></section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

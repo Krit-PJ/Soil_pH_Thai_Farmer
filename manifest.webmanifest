@@ -1,0 +1,9 @@
+{
+  "name": "Thai Farm Soil pH Field Index",
+  "short_name": "Soil pH",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#2563eb",
+  "lang": "th"
+}
